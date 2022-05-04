@@ -11,6 +11,11 @@
 /* BASE STYLES
 /*******************************************/
 
+body {
+  font-family: Roboto, sans-serif;
+  font-weight: 100;
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.27);
   border-radius: 16px;
@@ -25,7 +30,7 @@ input {
   margin: 1rem;
   border-radius: 10px;
   text-align: center;
-  border: 1px grey solid;
+  border: 3px solid whitesmoke
 }
 
 /******************************************
@@ -44,6 +49,14 @@ body {
 
 main {
   grid-area: 2 / 3 / 3 / 3;
+  display: grid;
+  grid-template: 1fr 5fr / 1fr;
+  grid-gap: 1rem;
+}
+
+.noteTitle {
+  grid-area: 1 / 1 / 2 / 2;
+  border-bottom: whitesmoke solid 3px;
 }
 
 .sidebar {
