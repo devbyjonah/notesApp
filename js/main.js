@@ -41,6 +41,9 @@ class Note{
 	renderNote(){
 		let title = document.createElement('h1')
 		let content = document.createElement('p')
+
+		document.querySelector('.noteTitle').appendChild(title)
+		document.querySelector('.')
 	}
 }
 
