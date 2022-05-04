@@ -16,6 +16,33 @@ body {
   font-weight: 100;
 }
 
+textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  font-weight: 100;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+.title {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  padding: 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.27);
   border-radius: 16px;
@@ -25,12 +52,13 @@ body {
   border: 1px solid rgba(255, 255, 255, 1);
 }
 
-input {
-  background: transparent;
+.search {
   margin: 1rem;
   border-radius: 10px;
   text-align: center;
-  border: 3px solid whitesmoke
+  border: 3px solid whitesmoke;
+  font-size: 1rem;
+  font-weight: 100;
 }
 
 /******************************************
@@ -39,6 +67,7 @@ input {
 
 body {
   min-height: 100vh;
+  max-height: 100vh;
   background-image: url('../img/forestBG.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -52,12 +81,16 @@ main {
   display: grid;
   grid-template: 1fr 8fr / 1fr;
   grid-gap: 1rem;
-  overflow-y: auto;
+  overflow: auto;
 }
 
 .noteTitle {
   grid-area: 1 / 1 / 2 / 2;
   border-bottom: whitesmoke solid 3px;
+}
+
+.noteContent {
+  padding: 1rem;
 }
 
 .sidebar {
