@@ -42,8 +42,11 @@ class Note{
 		let title = document.createElement('h1')
 		let content = document.createElement('p')
 
+		title.innerText = this._title
+		content.innerText = this._content
+
 		document.querySelector('.noteTitle').appendChild(title)
-		document.querySelector('.')
+		document.querySelector('.noteContent').appendChild(content)
 	}
 }
 
