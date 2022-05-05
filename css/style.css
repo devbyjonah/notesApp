@@ -131,7 +131,23 @@ main {
 }
 
 .notesList li {
-  flex: 1;
+  height: 75px;
+  display: grid;
+  grid-template: 1fr 2fr 1fr / repeat(3, 1fr);
+}
+
+.notesList h3 {
+  grid-area: 1 / 1 / 2 / 4;
+  margin: 0;
+}
+
+.notesList p {
+  grid-area: 2 / 1 / 3 / 4;
+  margin: 0;
+}
+
+.notesList span {
+  grid-area: 3 / 3 / 4 / 4;
 }
 
 /******************************************

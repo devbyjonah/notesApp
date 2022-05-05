@@ -48,14 +48,24 @@ class Note {
 	}
 
 	renderPreview(){
+		/* create elements */
 		let notePreview = document.createElement('li')
 		let title = document.createElement('h3')
 		let content = document.createElement('p')
 		let updated = document.createElement('span')
-		/* setup note preview maybe title/ content preview with date updated on right */
+
+		/* attach elements to container */
 		notePreview.appendChild(title)
 		notePreview.appendChild(content)
 		notePreview.appendChild(updated)
+
+		/* assign preview values */
+		title.innerText = this._title
+		content.innerText = this._content
+		updated.innerText = this._updated
+
+		/* append to DOM */
+		document.querySelector('.notesList').appendChild(notePreview)
 	}
 }
 
@@ -82,10 +92,12 @@ function NoteStorage(){
 	}
 }
 
-function main(){
+let main = function(){
 	/* create notes object to store and manage all notes */
 	let notes = new NoteStorage()
 	/* button setup */
 	const saveButton = document.querySelector('.saveButton')
 	const addButton = document.querySelector('.addButton')
 }
+
+document.addEventListener('DOMContentLoaded', main)
