@@ -46,6 +46,17 @@ class Note {
 		document.querySelector('.title').value = this._title
 		document.querySelector('.content').value = this._content
 	}
+
+	renderPreview(){
+		let notePreview = document.createElement('li')
+		let title = document.createElement('h3')
+		let content = document.createElement('p')
+		let updated = document.createElement('span')
+		/* setup note preview maybe title/ content preview with date updated on right */
+		notePreview.appendChild(title)
+		notePreview.appendChild(content)
+		notePreview.appendChild(updated)
+	}
 }
 
 function NoteStorage(){
@@ -57,7 +68,7 @@ function NoteStorage(){
 			this._noteList.push(JSON.parse(localStorage[i.toString()]))
 			this._noteCount += 1
 		}
-		/* insert note list into DOM here in .sidebar */
+		/* insert note list into DOM here in .sidebar using Note.renderPreview()*/
 	}
 
 	this.saveNote = function(note){
@@ -71,10 +82,10 @@ function NoteStorage(){
 	}
 }
 
-let notes = new NoteStorage()
-let myNote = new Note('label','this is my title', 'this is my notes content that i definitely spent a while on', 'dateCreated')
-
-/* let saveButton = document.querySelector('.saveButton')
-let addButton = document.querySelector('.addButton')
-
-saveButton.addEventListener('click', ) */
+function main(){
+	/* create notes object to store and manage all notes */
+	let notes = new NoteStorage()
+	/* button setup */
+	const saveButton = document.querySelector('.saveButton')
+	const addButton = document.querySelector('.addButton')
+}
