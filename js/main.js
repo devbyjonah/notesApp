@@ -9,8 +9,9 @@
 
 */
 
-class Note{
-	constructor(title, content, created){
+class Note {
+	constructor(label, title, content, created){
+		this._label = label
 		this._title = title
 		this._content = content
 		this._created = created
@@ -39,15 +40,37 @@ class Note{
 	}
 
 	renderNote(){
-		let title = document.createElement('h1')
-		let content = document.createElement('p')
-
-		title.innerText = this._title
-		content.innerText = this._content
-
-		document.querySelector('.noteTitle').appendChild(title)
-		document.querySelector('.noteContent').appendChild(content)
+		document.querySelector('.title').value = this._title
+		document.querySelector('.content').value = this._content
 	}
 }
 
-let mynote = new Note('title', 'my note', 'date made')
+function NoteStorage(){
+	this._noteCount = 0
+	this._noteList = []
+
+	this.initialize = function(){
+		for(let i = 0; i < localStorage.length; i++){
+			this._noteList.push(JSON.parse(localStorage[i.toString()]))
+			this._noteCount += 1
+		}
+		console.log(this._noteList)
+	}
+
+	this.addNote = function(note){
+		this._noteCount += 1
+		localStorage.setItem(this._noteCount, JSON.stringify(note))
+	}
+
+	this.removeNote = function(note){
+
+	}
+}
+
+let notes = new NoteStorage()
+let myNote = new Note('label','this is my title', 'this is my notes content that i definitely spent a while on', 'dateCreated')
+
+/* let saveButton = document.querySelector('.saveButton')
+let addButton = document.querySelector('.addButton')
+
+saveButton.addEventListener('click', ) */
