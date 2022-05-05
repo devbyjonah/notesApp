@@ -17,6 +17,9 @@ class Note {
 		this._created = created
 		this._updated = created
 	}
+	get label(){
+		return this._label
+	}
 	get title(){
 		return this._title
 	}
@@ -54,16 +57,17 @@ function NoteStorage(){
 			this._noteList.push(JSON.parse(localStorage[i.toString()]))
 			this._noteCount += 1
 		}
-		console.log(this._noteList)
+		/* insert note list into DOM here in .sidebar */
 	}
 
-	this.addNote = function(note){
+	this.saveNote = function(note){
 		this._noteCount += 1
 		localStorage.setItem(this._noteCount, JSON.stringify(note))
 	}
 
-	this.removeNote = function(note){
-
+	this.deleteNote = function(note){
+		localStorage.removeItem(note.label)
+		this._noteCount -= 1
 	}
 }
 
