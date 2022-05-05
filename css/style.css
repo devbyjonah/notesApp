@@ -122,6 +122,18 @@ main {
   align-items: center;
 }
 
+.notesList {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.notesList li {
+  flex: 1;
+}
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
