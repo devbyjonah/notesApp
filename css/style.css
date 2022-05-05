@@ -41,6 +41,11 @@ button {
   margin: 0 1rem 1rem 1rem;
 }
 
+button:hover {
+  background: black;
+  color: white;
+}
+
 .saveButton {
   background: white;
 }
@@ -48,11 +53,6 @@ button {
 .noteOptions {
   display: flex;
   flex-flow: row-reverse;
-}
-
-button:hover {
-  background: black;
-  color: white;
 }
 
 .title {
@@ -65,15 +65,6 @@ button:hover {
   font-weight: 700;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.27);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10.8px);
-  -webkit-backdrop-filter: blur(10.8px);
-  border: 1px solid rgba(255, 255, 255, 1);
-}
-
 .search {
   margin: 1rem;
   border-radius: 10px;
@@ -81,6 +72,15 @@ button:hover {
   border: 3px solid whitesmoke;
   font-size: 1rem;
   font-weight: 100;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.27);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10.8px);
+  -webkit-backdrop-filter: blur(10.8px);
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
 /******************************************
