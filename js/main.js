@@ -72,42 +72,53 @@ class Note {
 	}
 }
 
-function NoteStorage(){
-	this._noteCount = 0
-	this._noteList = []
+class NoteStorage{
+	constructor() {
+		this._noteCount = 0
+		this._noteList = []
+		this._currentNote
+	}
 
-	this.initialize = function(){
+	initialize(){
 		for(let i = 0; i < localStorage.length; i++){
 			this._noteList.push(JSON.parse(localStorage[i.toString()]))
 			this._noteCount += 1
 		}
 		/* insert note list into DOM here in .sidebar using Note.renderPreview()*/
+		this._noteList.forEach(note => note.renderPreview())
 	}
 
-	this.createNote = function(){
+	get currentNote(){
+		return this._currentNote
+	}
+
+	set currentNote(note){
+		this._currentNote = note
+	}
+
+	createNote(){
 		this._noteCount++
 		let newNote = new Note(this._noteCount, 'Enter title here . . .', 'Write your thoughts here . . .', Date())
+		newNote.renderNote()
 	}
 
-	this.saveNote = function(note){
+	saveNote(){
 		this._noteCount += 1
 		note.updated(Date())
 		localStorage.setItem(this._noteCount, JSON.stringify(note))
 	}
 
-	this.deleteNote = function(note){
+	deleteNote(note){
 		localStorage.removeItem(note.label)
 		note.removePreview()
 		this._noteCount -= 1
 	}
 }
 
-let init = function(){
-	/* create notes object to store and manage all notes */
-	let notes = new NoteStorage()
-	/* button setup */
-	const saveButton = document.querySelector('.saveButton')
-	const addButton = document.querySelector('.addButton')
-}
+/* button setup */
+const saveButton = document.querySelector('.saveButton')
+const addButton = document.querySelector('.addButton')
 
-document.addEventListener('DOMContentLoaded', init)
+/* create notes object to store and manage all notes */
+let notes = new NoteStorage()
+notes.initialize()
