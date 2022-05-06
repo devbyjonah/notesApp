@@ -50,6 +50,9 @@ class Note {
 		let content = document.createElement('p')
 		let updated = document.createElement('span')
 
+		/* assign preview class with this._label */
+		notePreview.className = this._label
+
 		/* attach elements to container */
 		notePreview.appendChild(title)
 		notePreview.appendChild(content)
@@ -62,6 +65,10 @@ class Note {
 
 		/* append to DOM */
 		document.querySelector('.notesList').appendChild(notePreview)
+	}
+
+	removePreview(){
+		document.querySelector('.' + this._label).remove()
 	}
 }
 
@@ -90,6 +97,7 @@ function NoteStorage(){
 
 	this.deleteNote = function(note){
 		localStorage.removeItem(note.label)
+		note.removePreview()
 		this._noteCount -= 1
 	}
 }
