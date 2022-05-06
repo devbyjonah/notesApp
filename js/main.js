@@ -10,12 +10,11 @@
 */
 
 class Note {
-	constructor(label, title, content, created){
+	constructor(label, title, content, date){
 		this._label = label
 		this._title = title
 		this._content = content
-		this._created = created
-		this._updated = created
+		this._updated = date
 	}
 	get label(){
 		return this._label
@@ -31,9 +30,6 @@ class Note {
 	}
 	set content(newContent){
 		this._content = newContent
-	}
-	get created(){
-		return this._created
 	}
 	get updated(){
 		return this._updated
@@ -81,8 +77,14 @@ function NoteStorage(){
 		/* insert note list into DOM here in .sidebar using Note.renderPreview()*/
 	}
 
+	this.createNote = function(){
+		this._noteCount++
+		let newNote = new Note(this._noteCount, 'Enter title here . . .', 'Write your thoughts here . . .', Date())
+	}
+
 	this.saveNote = function(note){
 		this._noteCount += 1
+		note.updated(Date())
 		localStorage.setItem(this._noteCount, JSON.stringify(note))
 	}
 
@@ -92,7 +94,7 @@ function NoteStorage(){
 	}
 }
 
-let main = function(){
+let init = function(){
 	/* create notes object to store and manage all notes */
 	let notes = new NoteStorage()
 	/* button setup */
@@ -100,4 +102,4 @@ let main = function(){
 	const addButton = document.querySelector('.addButton')
 }
 
-document.addEventListener('DOMContentLoaded', main)
+document.addEventListener('DOMContentLoaded', init)
