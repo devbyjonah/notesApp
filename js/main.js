@@ -51,7 +51,7 @@ class Note {
 		let updated = document.createElement('span')
 
 		/* assign preview class with this._label */
-		notePreview.className = this._label
+		notePreview.id = this._label
 
 		/* attach elements to container */
 		notePreview.appendChild(title)
@@ -75,17 +75,21 @@ class Note {
 class NoteStorage{
 	constructor() {
 		this._noteCount = 0
-		this._noteList = []
+		this._noteList = {}
 		this._currentNote
 	}
 
 	initialize(){
 		for(let i = 0; i < localStorage.length; i++){
-			this._noteList.push(JSON.parse(localStorage[i.toString()]))
+			let current = JSON.parse(localStorage[(i + 1).toString()])
+			this._noteList[current.label] = current
 			this._noteCount += 1
+			current.renderPreview()
 		}
-		/* insert note list into DOM here in .sidebar using Note.renderPreview()*/
-		this._noteList.forEach(note => note.renderPreview())
+	}
+
+	get noteList(){
+		return this._noteList
 	}
 
 	get currentNote(){
@@ -99,13 +103,18 @@ class NoteStorage{
 	createNote(){
 		this._noteCount++
 		let newNote = new Note(this._noteCount, 'Enter title here . . .', 'Write your thoughts here . . .', Date())
+		this._currentNote = newNote
 		newNote.renderNote()
 	}
 
 	saveNote(){
+		if (!this.currentNote){
+			let newNote = new Note(this._noteCount, document.querySelector('.title').innerText, document.querySelector('.content').innerText, Date())
+			this._currentNote = newNote
+		}
 		this._noteCount += 1
-		note.updated(Date())
-		localStorage.setItem(this._noteCount, JSON.stringify(note))
+		this._currentNote.updated = Date()
+		localStorage.setItem(this._noteCount, JSON.stringify(this._currentNote))
 	}
 
 	deleteNote(note){
@@ -118,7 +127,16 @@ class NoteStorage{
 /* button setup */
 const saveButton = document.querySelector('.saveButton')
 const addButton = document.querySelector('.addButton')
+const preview = document.querySelector('li')
 
 /* create notes object to store and manage all notes */
 let notes = new NoteStorage()
 notes.initialize()
+
+/* event listeners*/
+saveButton.addEventListener('click', () => notes.saveNote())
+addButton.addEventListener('click', () => notes.createNote())
+preview.addEventListener('click', (val) => {
+	notes.noteList[val.id].renderNote()
+	notes.currentNote = notes.noteList[val.id]
+})
