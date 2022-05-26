@@ -18,7 +18,7 @@ class Note{
 		this.key = new Date().toLocaleString()
 		this.title = title
 		this.content = content
-		this.updated = updated
+		this.updated = this.key
 	}
 
 	deleteNote(){
@@ -28,6 +28,7 @@ class Note{
 	saveNote(){
 		this.title = document.querySelector('.title').value
 		this.content = document.querySelector('.content').innerText
+		this.updated = new Date().toLocaleString()
 
 		localStorage.setItem(this.key, JSON.stringify(this))
 	}
@@ -39,3 +40,9 @@ class Note{
 }
 
 let defaultNote = new Note('', '', new Date().toLocaleString)
+
+function init(){
+	for (let i = 0; i < localStorage.length; i++){
+
+	}
+}
