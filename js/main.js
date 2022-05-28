@@ -13,6 +13,8 @@
 
 // It has 4 properties: key, title, content, and updated
 
+let displayedNote // displayedNote holds the Note object of the current opened note
+
 class Note{
 	constructor(key, title, content){
 		this.key = key
@@ -37,6 +39,8 @@ class Note{
 		document.querySelector('.title').value = this.title
 		document.querySelector('.content').innerText = this.content
 		document.querySelector('#noteID').innerText = this.key
+
+		displayedNote = this
 	}
 }
 
@@ -56,6 +60,6 @@ function init(){
 	}
 }
 
-let displayedNote = new Note(new Date().toLocaleString(), 'my title here', 'my content here')
+displayedNote = new Note(new Date().toLocaleString(), 'my title here', 'my content here')
 
 document.addEventListener('DOMContentLoaded', () => init())
