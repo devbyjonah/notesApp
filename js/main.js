@@ -14,8 +14,8 @@
 // It has 4 properties: key, title, content, and updated
 
 class Note{
-	constructor(title, content, updated){
-		this.key = new Date().toLocaleString()
+	constructor(key, title, content, updated){
+		this.key = key
 		this.title = title
 		this.content = content
 		this.updated = this.key
@@ -42,9 +42,15 @@ class Note{
 function init(){
 	for (let i = 0; i < localStorage.length; i++){
 		let current = JSON.parse(localStorage.getItem(localStorage.key(i)))
+		let loadedNote = new Note(current.key, current.title, current.content, current.updated)
+
 		let preview = document.createElement('li')
 
 		preview.innerText = current.key
+		preview.id = current.key
+		preview.addEventListener('click', () => {
+			loadedNote.openNote()
+		})
 		document.querySelector('.notesList').appendChild(preview)
 	}
 }
