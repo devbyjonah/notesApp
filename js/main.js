@@ -61,7 +61,7 @@ function init(){
 
 		let preview = document.createElement('li') // note preview to be appended to notesList sidebar
 
-		preview.innerText = current.key
+		preview.innerText = current.title
 		preview.id = current.key
 
 		// add event listener to preview to open the note it represents
