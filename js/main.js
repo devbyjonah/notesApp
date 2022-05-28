@@ -14,11 +14,11 @@
 // It has 4 properties: key, title, content, and updated
 
 class Note{
-	constructor(key, title, content, updated){
+	constructor(key, title, content){
 		this.key = key
 		this.title = title
 		this.content = content
-		this.updated = this.key
+		this.updated = new Date().toLocaleString()
 	}
 
 	deleteNote(){
@@ -36,6 +36,7 @@ class Note{
 	openNote(){
 		document.querySelector('.title').value = this.title
 		document.querySelector('.content').innerText = this.content
+		document.querySelector('#noteID').innerText = this.key
 	}
 }
 
@@ -54,5 +55,7 @@ function init(){
 		document.querySelector('.notesList').appendChild(preview)
 	}
 }
+
+let displayedNote = new Note(new Date().toLocaleString(), 'my title here', 'my content here')
 
 document.addEventListener('DOMContentLoaded', () => init())
