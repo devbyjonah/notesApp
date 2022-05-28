@@ -138,6 +138,10 @@ main {
   height: 75px;
 }
 
+.notesList li:hover {
+  color: dimgray;
+}
+
 .notesList h3 {
   grid-area: 1 / 1 / 2 / 4;
   margin: 0;
