@@ -5,7 +5,7 @@
 		- setItem(data) = adds key and value to storage || updates key if it already exists
 		- getItem(key) = returns value of provided key
 		- removeItem(key) = removes provided key
-		- clear = empties local storage
+		- clear() = empties local storage
 
 */
 
@@ -16,11 +16,11 @@
 let displayedNote // displayedNote holds the Note object of the current opened note
 
 class Note{
-	constructor(key, title, content){
+	constructor(key, title, content, updated){
 		this.key = key
 		this.title = title
 		this.content = content
-		this.updated = new Date().toLocaleString()
+		this.updated = updated
 	}
 
 	deleteNote(){
@@ -29,7 +29,7 @@ class Note{
 
 	saveNote(){
 		this.title = document.querySelector('.title').value
-		this.content = document.querySelector('.content').innerText
+		this.content = document.querySelector('.content').value
 		this.updated = new Date().toLocaleString()
 
 		localStorage.setItem(this.key, JSON.stringify(this))
@@ -37,7 +37,7 @@ class Note{
 
 	openNote(){
 		document.querySelector('.title').value = this.title
-		document.querySelector('.content').innerText = this.content
+		document.querySelector('.content').value = this.content
 		document.querySelector('#noteID').innerText = this.key
 
 		displayedNote = this
@@ -45,6 +45,12 @@ class Note{
 }
 
 function init(){
+	// emptying list before loading notes back in
+	const notesList = document.querySelector('.notesList')
+	while (notesList.firstChild){
+		notesList.removeChild(notesList.lastChild)
+	}
+
 	for (let i = 0; i < localStorage.length; i++){
 		let current = JSON.parse(localStorage.getItem(localStorage.key(i)))
 		let loadedNote = new Note(current.key, current.title, current.content, current.updated)
@@ -56,10 +62,15 @@ function init(){
 		preview.addEventListener('click', () => {
 			loadedNote.openNote()
 		})
-		document.querySelector('.notesList').appendChild(preview)
+		notesList.appendChild(preview)
 	}
 }
 
-displayedNote = new Note(new Date().toLocaleString(), 'my title here', 'my content here')
+displayedNote = new Note(new Date().toLocaleString(), 'my title here', 'my content here', new Date().toLocaleString())
+displayedNote.openNote()
 
 document.addEventListener('DOMContentLoaded', () => init())
+document.querySelector('.saveButton').addEventListener('click', () => {
+	displayedNote.saveNote()
+	init()
+})
