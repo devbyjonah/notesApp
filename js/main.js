@@ -72,8 +72,8 @@ function init(){
 	}
 }
 // display default note on startup
-displayedNote = new Note(new Date().toLocaleString(), 'my title here', 'my content here', new Date().toLocaleString())
-displayedNote.openNote()
+let emptyNote = new Note(new Date().toLocaleString(), '', '', new Date().toLocaleString())
+emptyNote.openNote()
 
 document.addEventListener('DOMContentLoaded', () => init()) // call init function after DOM is loaded in
 // event listener for saveButton saves note into localStoraage and calls init() function to refresh notesList
@@ -81,7 +81,13 @@ document.querySelector('.saveButton').addEventListener('click', () => {
 	displayedNote.saveNote()
 	init()
 })
+// new note event listener creates new Note object and opens the note with openNote() method
 document.querySelector('.addButton').addEventListener('click', () => {
 	let newNote = new Note(new Date().toLocaleString(), '', '', new Date().toLocaleString())
 	newNote.openNote()
+})
+document.querySelector('.deleteButton').addEventListener('click', () => {
+	displayedNote.deleteNote()
+	emptyNote.openNote()
+	init()
 })
