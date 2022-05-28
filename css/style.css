@@ -141,8 +141,12 @@ main {
 
 .notesList li {
   height: 75px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .notesList li:hover {
