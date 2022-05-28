@@ -76,7 +76,12 @@ displayedNote = new Note(new Date().toLocaleString(), 'my title here', 'my conte
 displayedNote.openNote()
 
 document.addEventListener('DOMContentLoaded', () => init()) // call init function after DOM is loaded in
-document.querySelector('.saveButton').addEventListener('click', () => { // event listener for saveButton saves note into localStoraage and calls init() function to refresh notesList
+// event listener for saveButton saves note into localStoraage and calls init() function to refresh notesList
+document.querySelector('.saveButton').addEventListener('click', () => { 
 	displayedNote.saveNote()
 	init()
+})
+document.querySelector('.addButton').addEventListener('click', () => {
+	let newNote = new Note(new Date().toLocaleString(), '', '', new Date().toLocaleString())
+	newNote.openNote()
 })
