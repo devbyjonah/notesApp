@@ -50,6 +50,14 @@ button:hover {
   color: white;
 }
 
+button:active {
+  transform: scale(95%);
+}
+
+li:active {
+  transform: scale(98%);
+}
+
 .saveButton {
   background: white;
 }
