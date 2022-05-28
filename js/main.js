@@ -39,10 +39,14 @@ class Note{
 	}
 }
 
-let defaultNote = new Note('', '', new Date().toLocaleString)
-
 function init(){
 	for (let i = 0; i < localStorage.length; i++){
+		let current = JSON.parse(localStorage.getItem(localStorage.key(i)))
+		let preview = document.createElement('li')
 
+		preview.innerText = current.key
+		document.querySelector('.notesList').appendChild(preview)
 	}
 }
+
+document.addEventListener('DOMContentLoaded', () => init())
