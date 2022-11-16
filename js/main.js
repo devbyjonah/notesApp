@@ -9,15 +9,18 @@
 
 */
 
-// The Note object has methods to allow adding a new note, saving a note, deleting a note, and opening a note
+// The Note class has methods to allow adding a new note, saving a note, deleting a note, and opening a note
 
 // It has 4 properties: key, title, content, and updated
 
-let displayedNote // displayedNote holds the Note object of the current opened note
+let displayedNote // displayedNote holds the Note object of the currently opened note
 
 class Note{
-	constructor(key, title, content, updated){
-		this.key = key // key is set to a unique string of date/time the note was created
+
+	static count = 0
+
+	constructor(title, content, updated){
+		this.key = ++Note.count
 		this.title = title
 		this.content = content
 		this.updated = updated // updated stores the date and time the note was last saved
@@ -47,7 +50,20 @@ class Note{
 	}
 }
 
+async function randomBackground(){
+	const base = 'https://api.unsplash.com'
+	const endpoint = '/search/photos?query=forest&per_page=1'
+	let url = `${base + endpoint}&client_id=accesskeyhere`
+
+	let response = await fetch(url)
+	let data = await response.json()
+	let image = data.results[0].urls.full
+	
+	document.querySelector('body').style.backgroundImage = `url(${image})`
+}
+
 function init(){
+	randomBackground()
 	// cycle through notesList element and remove each child element (clearing list)
 	const notesList = document.querySelector('.notesList')
 	while (notesList.firstChild){
@@ -57,7 +73,7 @@ function init(){
 	// iterate through localStorage, re-constructing serialized strings into Note objects
 	for (let i = 0; i < localStorage.length; i++){
 		let current = JSON.parse(localStorage.getItem(localStorage.key(i))) // current note object
-		let loadedNote = new Note(current.key, current.title, current.content, current.updated) // init object with Note constructor
+		let loadedNote = new Note(current.title, current.content, current.updated) // init object with Note constructor
 
 		let preview = document.createElement('li') // note preview to be appended to notesList sidebar
 
@@ -72,7 +88,7 @@ function init(){
 	}
 }
 // display default note on startup
-let emptyNote = new Note(new Date().toLocaleString(), '', '', new Date().toLocaleString())
+let emptyNote = new Note('', '', new Date().toLocaleString())
 emptyNote.openNote()
 
 document.addEventListener('DOMContentLoaded', () => init()) // call init function after DOM is loaded in
@@ -83,7 +99,7 @@ document.querySelector('.saveButton').addEventListener('click', () => {
 })
 // new note event listener creates new Note object and opens the note with openNote() method
 document.querySelector('.addButton').addEventListener('click', () => {
-	let newNote = new Note(new Date().toLocaleString(), '', '', new Date().toLocaleString())
+	let newNote = new Note('', '', new Date().toLocaleString())
 	newNote.openNote()
 })
 document.querySelector('.deleteButton').addEventListener('click', () => {
